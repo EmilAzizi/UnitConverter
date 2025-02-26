@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit converter</title>
+    <style>
+        body {
+            background-color: rgb(87, 191, 252);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .header {
+            margin-bottom: 20px;
+        }
+
+        .main-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            width: 350px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .result {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header">
+            <h1>Hello! Welcome to the unit converter!</h1>
+            <p>Please write a number to begin converting:</p>
+        </div>
+    <div>
+        <input type="number" id="inputValue" placeholder="Enter value">
+
+        <p>What unit would you like to convert from?</p>
+        <select id="unitToConvertFrom">
+            <option value="grams">Grams</option>
+            <option value="ounce">Ounce</option>
+            <option value="cups">Cups</option>
+            <option value="ml">Mililiter</option>
+        </select>
+
+        <p>What unit would you like to convert to?</p>
+        <select id="unitToConvertTo">
+            <option value="grams">Grams</option>
+            <option value="ounce">Ounce</option>
+            <option value="cups">Cups</option>
+            <option value="ml">Mililiter</option>
+            
+        </select>
+
+        <button onclick="convert()">Press me to convert!</button>
+        <div class="result" id="result">Result: --</div>
+    </div>
+
+    <script>
+        function convert(){
+            const value = parseFloat(document.getElementById("inputValue").value);
+            const unitToConvertFrom = document.getElementById("unitToConvertFrom").value;
+            const unitToConvertTo = document.getElementById("unitToConvertTo").value;
+            let result = 0;
+
+            if(unitToConvertFrom === unitToConvertTo){
+                result = value;
+            } else {
+                if(unitToConvertFrom === "grams"){
+                    if(unitToConvertTo === "ounce"){
+                        result = value * 0.035274;
+                    }
+                    
+                    else if(unitToConvertTo === "ml"){
+                        result = value * 1;
+                    }
+                    
+                    else if(unitToConvertTo === "cups"){
+                        result = value * 0.00416667;
+                    }
+
+                } else if(unitToConvertFrom === "ounce"){
+                    if(unitToConvertTo === "grams"){
+                        result = value * 28.349523125;
+                    }
+                    
+                    else if(unitToConvertTo === "ml"){
+                        result = value * 29.5735
+                    }
+                    
+                    else if(unitToConvertTo === "cups"){
+                        result = value * 0.125;
+                    }
+
+                } else if(unitToConvertFrom === "ml") {
+                    if(unitToConvertTo === "grams"){
+                        result = value * 1;
+                    }
+                    
+                    else if(unitToConvertTo === "ounce"){
+                        result = value * 0.033814;
+                    }
+                    
+                    else if(unitToConvertTo === "cups"){
+                        result = value * 0.00422675
+                    }
+
+                } else if(unitToConvertFrom === "cups"){
+                    if(unitToConvertTo === "ml"){
+                        result = value * 240;
+                    }
+                    
+                    else if(unitToConvertTo === "grams"){
+                        result = value * 240;
+                    }
+                    
+                    else if(unitToConvertTo === "ounce"){
+                        result = value * 8;
+                    }
+                }
+            }
+
+            document.getElementById("result").innerHTML = `Result: ${result.toFixed(2)} ${unitToConvertTo}`;
+        }
+    </script>
+</body>
+</html>
